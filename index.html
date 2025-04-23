@@ -237,7 +237,7 @@
       const params = `?nombre=${encodeURIComponent(nombre)}&telefono=${encodeURIComponent(telefono)}&ciudad=${encodeURIComponent(ciudad)}`;
       fetch(googleScriptURL + params)
         .then(() => {
-          window.location.href = `https://renovex.co${params}`;
+          window.location.href = `https://renovexenlinea.com${params}`;
         })
         .catch(error => {
           alert("Hubo un problema al guardar los datos. Intenta de nuevo.");
