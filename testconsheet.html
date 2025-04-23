@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Sexualidad - Rénovex</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #000;
+      color: #fff;
+      padding: 20px;
+      max-width: 480px;
+      margin: auto;
+      position: relative;
+      overflow-x: hidden;
+      height: 99vh;
+    }
+    .question, .story, .input-name, .final, .form-contacto {
+      margin-bottom: 20px;
+      animation: fadeIn 0.5s ease-in-out;
+      position: relative;
+      z-index: 20;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background: #e60073;
+      border: none;
+      margin: 10px 0;
+      font-size: 16px;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: 0.3s ease;
+      
+    }
+    .btn:hover {
+      background: #c40063;
+    }
+    .hidden { display: none; }
+    .corner-img {
+      position: absolute;
+      bottom: 10px;
+      right: 0px;
+      opacity: 0.8;
+      width: 70%;
+      -webkit-animation: shake-horizontal 25s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+	        animation: shake-horizontal 25s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+    }
+    .progress-bar {
+      height: 6px;
+      background: #e60073;
+      width: 0;
+      transition: width 0.3s ease;
+      margin-bottom: 20px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    input[type="text"] {
+      width: 95%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: none;
+    }
+
+    @-webkit-keyframes shake-horizontal {
+  0%,
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    -webkit-transform: translateX(-10px);
+            transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60% {
+    -webkit-transform: translateX(10px);
+            transform: translateX(10px);
+  }
+  80% {
+    -webkit-transform: translateX(8px);
+            transform: translateX(8px);
+  }
+  90% {
+    -webkit-transform: translateX(-8px);
+            transform: translateX(-8px);
+  }
+}
+@keyframes shake-horizontal {
+  0%,
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    -webkit-transform: translateX(-10px);
+            transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60% {
+    -webkit-transform: translateX(10px);
+            transform: translateX(10px);
+  }
+  80% {
+    -webkit-transform: translateX(8px);
+            transform: translateX(8px);
+  }
+  90% {
+    -webkit-transform: translateX(-8px);
+            transform: translateX(-8px);
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="input-name">
+      <p>¿Te atreves a descubrir qué tan bueno eres realmente en la cama?</p>
+      <p>Ingresa tu nombre para comenzar:</p>
+      <input type="text" id="username" placeholder="Tu nombre">
+      <button class="btn" onclick="startTest()">Comenzar</button>
+    </div>
+    <div id="test-container" class="hidden">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+   <!-- <img src="hentay1.png" alt="" class="corner-img">-->
+    <video src="saltitos.mp4" class="corner-img" autoplay muted></video>
+  </div>
+  <audio id="clickSound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"></audio>
+  <script>
+    const preguntas = [
+      {
+        historia: nombre => `Hace unos días, ${nombre}, una mujer me dijo que el 80% de los hombres creen rendir más de lo que realmente lo hacen. ¿Y tú?`,
+        pregunta: "¿Cuánto tiempo sueles durar en una relación sexual?",
+        opciones: ["Menos de 2 minutos", "Entre 2 y 10 minutos", "Más de 10 minutos"]
+      },
+      {
+        historia: nombre => `Un chico me confesó que nunca había hecho llegar a una mujer al clímax. ${nombre}, ¿te ha pasado algo así?`,
+        pregunta: "¿Sientes que das verdadero placer?",
+        opciones: ["A veces lo dudo", "Creo que sí", "Me lo aseguran siempre"]
+      },
+      {
+        historia: () => "En una noche de pasión, lo que empieza como fuego puede apagarse si no estás preparado...",
+        pregunta: "¿Te sientes seguro cuando llega el momento?",
+        opciones: ["No siempre", "Con nervios", "Totalmente seguro"]
+      },
+      {
+        historia: nombre => `${nombre}, me encontré con alguien que evitaba el sexo… por miedo a fallar.`,
+        pregunta: "¿Has evitado encuentros íntimos por miedo a no rendir?",
+        opciones: ["Sí, más de una vez", "Alguna vez", "Nunca"]
+      },
+      {
+        historia: nombre => `"No quiero cantidad, quiero calidad", me dijo ella. Y eso se logra con control, ${nombre}.`,
+        pregunta: "¿Controlas tu eyaculación?",
+        opciones: ["Casi nunca", "A veces", "Sí, lo manejo bien"]
+      },
+      {
+        historia: nombre => `Una pareja me confesó que aunque había deseo, faltaba intensidad. ¿Te ha pasado eso, ${nombre}?`,
+        pregunta: "¿Cómo calificarías tu deseo sexual últimamente?",
+        opciones: ["Bajo", "Regular", "Alto"]
+      },
+      {
+        historia: nombre => `Llegaste al final, ${nombre}. Te contaré algo que puede cambiarlo todo si estás listo...`,
+        pregunta: "¿Estarías dispuesto a seguir un tratamiento natural para mejorar tu rendimiento?",
+        opciones: ["Sí, lo necesito", "Lo pensaría", "No"]
+      }
+    ];
+
+    let current = 0;
+    let nombre = "";
+    const googleScriptURL = 'https://script.google.com/macros/s/AKfycbynHvBIHBXQSmJG1mw5RZlwmakoNEigBqXh6Uq13S3T634AveMduEcRr-px5qk5PkvFOg/exec';
+
+    function startTest() {
+      nombre = document.getElementById('username').value || "amigo";
+      document.querySelector('.input-name').classList.add('hidden');
+      document.getElementById('test-container').classList.remove('hidden');
+      mostrarPregunta();
+    }
+
+    function playSound() {
+      document.getElementById('clickSound').play();
+    }
+
+    function mostrarPregunta() {
+      if (current >= preguntas.length) {
+        document.getElementById('test-container').innerHTML = `
+          <div class="form-contacto">
+            <p>${nombre}, antes de mostrarte los resultados necesito unos datos rápidos:</p>
+            <input type="text" id="telefono" placeholder="Tu WhatsApp (sin espacios)">
+            <input type="text" id="ciudad" placeholder="Tu ciudad o zona">
+            <button class="btn" onclick="enviarDatos()">Enviar y continuar</button>
+          </div>`;
+        return;
+      }
+
+      const progreso = ((current + 1) / preguntas.length) * 100;
+      document.getElementById('progressBar').style.width = progreso + '%';
+
+      const p = preguntas[current];
+      const html = `
+        <div class="story"><p>${p.historia(nombre)}</p></div>
+        <div class="question">
+          <p><strong>${p.pregunta}</strong></p>
+          ${p.opciones.map(op => `<button class="btn" onclick="siguientePregunta()">${op}</button>`).join('')}
+        </div>`;
+      document.getElementById('test-container').innerHTML = '<div class="progress-bar" id="progressBar" style="width: ' + progreso + '%"></div>' + html;
+    }
+
+    function siguientePregunta() {
+      playSound();
+      current++;
+      mostrarPregunta();
+    }
+
+    function enviarDatos() {
+      const telefono = document.getElementById('telefono').value.trim();
+      const ciudad = document.getElementById('ciudad').value.trim();
+      if (!telefono || !ciudad) {
+        alert("Por favor completa todos los campos");
+        return;
+      }
+      const params = `?nombre=${encodeURIComponent(nombre)}&telefono=${encodeURIComponent(telefono)}&ciudad=${encodeURIComponent(ciudad)}`;
+      fetch(googleScriptURL + params)
+        .then(() => {
+          window.location.href = `https://renovex.co${params}`;
+        })
+        .catch(error => {
+          alert("Hubo un problema al guardar los datos. Intenta de nuevo.");
+          console.error(error);
+        });
+    }
+  </script>
+</body>
+</html>
